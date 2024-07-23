@@ -1,9 +1,22 @@
 from django.db import models
 
 # Create your models here.
+class Ville(models.Model):
+    nom = models.CharField(max_length=75)
+    longitude = models.FloatField()
+    latitute = models.FloatField()
+    altitude = models.FloatField()
+    cinema = models.ForeignKey()
+    def __str__(self):
+        return self.nom
+
 class Cinema(models.Model):
     nom = models.CharField(max_length=75)
     nombreSalle = models.IntegerField(default=1)
+    longitude = models.FloatField()
+    latitute = models.FloatField()
+    altitude = models.FloatField()
+    ville = models.ManyToOneRel(Ville)
     def __str__(self):
         return self.nom
 
@@ -51,11 +64,3 @@ class Seance(models.Model):
     def __str__(self):
         return self.heureDebut
 
-class Ville(models.Model):
-    nom = models.CharField(max_length=75)
-    longitude = models.FloatField()
-    latitute = models.FloatField()
-    altitude = models.FloatField()
-    cinema = models.ForeignKey()
-    def __str__(self):
-        return self.nom
