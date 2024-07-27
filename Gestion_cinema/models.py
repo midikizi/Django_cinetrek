@@ -55,12 +55,11 @@ class Projection(models.Model):
     date = models.DateField()
     prix = models.FloatField()
     film = models.OneToOneField(Film)
-    def __str__(self):
-        return self.date
+    class Meta:
+        abstract = True
 
-class Seance(models.Model):
+class Seance(Projection):
     heureDebut = models.DateTimeField()
-    projection = models.ForeignKey(Projection)
     def __str__(self):
         return self.heureDebut
 
