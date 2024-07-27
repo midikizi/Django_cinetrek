@@ -1,32 +1,54 @@
-from django.shortcuts import render,redirect
-from django.contrib.auth import get_user_model
-from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework import status 
+
+from django.shortcuts import get_object_or_404
+from .serializers import ClientSerializer
+from .models import Client
+
 # Create your views here.
-def register(request):
+@api_view(['POST'])
+def logout_user(request):
     if request.method == 'POST':
-        first_name = request.POST.get('first_name', '')
-        last_name = request.POST.get('last_name', '')
-        email = request.POST.get('email', '')
-        username = request.POST.get('username', '')
-        password = request.POST.get('password', '')
-        confirm_password = request.POST.get('confirm_password', '')
-        role = request.POST.get('role', 'client')  # Default role is 'client'
+        request.user.auth.token.delete()
+        return Response({"message": "User logged out"}, status=status.HTTP_200_OK)
 
-        if password != confirm_password:
-            messages.error(request, "Passwords do not match.")
-            return redirect('register')
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def register_user_client(request):
+    clientSerializer = ClientSerializer(data=request.data)
+    if clientSerializer.is_valid():
+        email = clientSerializer.validate_data['email']
+        username = clientSerializer.validate_data['username']
+        if Client.objects.filter(email=email).exists():
+            return Response({'error': 'Email already registered'}, status=status.HTTP_400_BAD_REQUEST)
+        if Client.objects.filter(username=username).exists():
+            return Response({'error': 'Username already taken'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        client = clientSerializer.save()
+        return Response({
+            'response': 'Client account created successfully',
+            'username': client.username,
+            'email': client.email,
+            'token': client.auth_token.key
+        }, status=status.HTTP_201_CREATED)
+    else:
+        return Response(clientSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        User = get_user_model()
-        user = User.objects.create_user(
-            username=username,
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-            password=password,
-            role=role
-        )
-        user.save()
-        messages.success(request, "User registered successfully.")
-        return redirect('login')
-    return render(request, 'register.html')
+@api_view(['POST'])
+def login_user(request):
+    user = get_object_or_404(Client, username=request.data['username'])
+    if not user.check_password(request.data['password']):
+        return Response({"detail": "Utilisateur non trouve"}, status=status.HTTP_404_NOT_FOUND)
+    token, created = Token.objects.get_or_create(user=user)
+    serializer = ClientSerializer(instance=user)
+    return Response({"token": token, "user": serializer.data})
+
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def test_token(request):
+    return Response(f"Succes pour {request.user.email}.")
