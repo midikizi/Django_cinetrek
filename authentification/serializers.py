@@ -10,7 +10,7 @@ class ClientSerializer(serializers.Serializer):
     def create(self, validated_data):
         client = Client.objects.create(**validated_data)
         return client
-    
+
     def update(self, instance, validated_data):
         instance['username'] = validated_data.get('username', instance.username)
         instance['password'] = validated_data.get('password', instance.password)

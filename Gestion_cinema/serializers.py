@@ -9,4 +9,3 @@ class VilleSerializer(serializers.Serializer):
     def create(self, validated_data):
         ville = Ville.objects.create(**validated_data)
         return ville
-    

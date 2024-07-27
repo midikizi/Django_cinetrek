@@ -21,8 +21,9 @@ def logout_user(request):
 def register_user_client(request):
     clientSerializer = ClientSerializer(data=request.data)
     if clientSerializer.is_valid():
-        email = clientSerializer.validate_data['email']
-        username = clientSerializer.validate_data['username']
+        email = clientSerializer.validated_data['email']
+        print(email)
+        username = clientSerializer.validated_data['username']
         if Client.objects.filter(email=email).exists():
             return Response({'error': 'Email already registered'}, status=status.HTTP_400_BAD_REQUEST)
         if Client.objects.filter(username=username).exists():
