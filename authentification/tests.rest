@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {"username": "john_doe", "password": "john"}
 
-###
+### rest client
 
 POST http://127.0.0.1:8000/accounts/api/register/client
 Content-Type: application/json
