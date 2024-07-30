@@ -1,19 +1,19 @@
-POST http://127.0.0.1:8000/accounts/api/login
+POST http://127.0.0.1:8000/accounts/api/login/
 Content-Type: application/json
 
 {"username": "john_doe", "password": "john"}
 
 ### rest client
 
-POST http://127.0.0.1:8000/accounts/api/register/client
+POST http://127.0.0.1:8000/accounts/api/sign-up/client/
 Content-Type: application/json
 
 {"username": "john_doe", "password": "john", "email": "john@gmail.com", "first_name": "Doe", "last_name": "John"}
 
 ###
 
-GET http://127.0.0.1:8000/accounts/api/test-token
+POST http://127.0.0.1:8000/accounts/api/api-auth-token
 Content-Type: application/json
 Authorization: Token xxxxxxxxx
 
-{}
+{"username": "john_doe", "password": "john"}

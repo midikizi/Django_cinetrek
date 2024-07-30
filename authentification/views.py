@@ -3,10 +3,11 @@ from rest_framework.authentication import SessionAuthentication, TokenAuthentica
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView 
 from rest_framework import status 
 
-from django.shortcuts import get_object_or_404
-from .serializers import ClientSerializer
+from django.contrib.auth import authenticate
+from .serializers import *
 from .models import Client
 
 # Create your views here.
@@ -16,40 +17,33 @@ def logout_user(request):
         request.user.auth.token.delete()
         return Response({"message": "User logged out"}, status=status.HTTP_200_OK)
 
-@api_view(['POST'])
 @permission_classes([AllowAny])
-def register_user_client(request):
-    clientSerializer = ClientSerializer(data=request.data)
-    if clientSerializer.is_valid():
-        email = clientSerializer.validated_data['email']
-        print(email)
-        username = clientSerializer.validated_data['username']
-        if Client.objects.filter(email=email).exists():
-            return Response({'error': 'Email already registered'}, status=status.HTTP_400_BAD_REQUEST)
-        if Client.objects.filter(username=username).exists():
-            return Response({'error': 'Username already taken'}, status=status.HTTP_400_BAD_REQUEST)
-        
-        client = clientSerializer.save()
-        return Response({
-            'response': 'Client account created successfully',
-            'username': client.username,
-            'email': client.email,
-            'token': client.auth_token.key
-        }, status=status.HTTP_201_CREATED)
-    else:
-        return Response(clientSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class RegisterClient(APIView):
+    def post(self, request):
+        serializer = ClientSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            token, created = Token.objects.create(user=serializer.client)
+            return Response({'user': serializer.data, 'token': token}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@permission_classes([AllowAny])
+class RegisterGerant(APIView):
+    def post(self, request):
+        serializer = GerantSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            token, created = Token.objects.create(user=serializer.gerant)
+            return Response({'user': serializer.data, 'token': token}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data.get('username', '')
+        password = request.data.get('password', '')
 
-@api_view(['POST'])
-def login_user(request):
-    user = get_object_or_404(Client, username=request.data['username'])
-    if not user.check_password(request.data['password']):
-        return Response({"detail": "Utilisateur non trouve"}, status=status.HTTP_404_NOT_FOUND)
-    token, created = Token.objects.get_or_create(user=user)
-    serializer = ClientSerializer(instance=user)
-    return Response({"token": token, "user": serializer.data})
-
-@api_view(['GET'])
-@authentication_classes([SessionAuthentication, TokenAuthentication])
-@permission_classes([IsAuthenticated])
-def test_token(request):
-    return Response(f"Succes pour {request.user.email}.")
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key}, status=status.HTTP_200_OK)
+        return Response({'error': 'Invalid Credentials'}, status=status.HTTP_400_BAD_REQUEST)
