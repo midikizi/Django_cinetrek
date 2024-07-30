@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from django.contrib.auth.hashers import make_password
 from .models import Client, Gerant
 
 class ClientSerializer(serializers.Serializer):
@@ -8,6 +9,9 @@ class ClientSerializer(serializers.Serializer):
         fields = ('username', 'password', 'email', 'first_name', 'last_name')
 
     def create(self, validated_data):
+        password = validated_data['password']
+        password = make_password(password)
+        validated_data['password'] = password
         client = Client.objects.create(**validated_data)
         return client
 
@@ -27,6 +31,9 @@ class GerantSerializer(serializers.Serializer):
         fields = ('username', 'password', 'email', 'first_name', 'last_name')
 
     def create(self, validated_data):
+        password = validated_data['password']
+        password = make_password(password)
+        validated_data['password'] = password
         gerant = Gerant.objects.create(**validated_data)
         return gerant
     
