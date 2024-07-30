@@ -90,19 +90,19 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-
-'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_cinetrek',  # Remplacez par le nom de votre base de données
-        'USER': 'root',       # Remplacez par votre utilisateur MySQL
-        'PASSWORD': 'midikizi',  # Remplacez par votre mot de passe MySQL
-        'HOST': 'localhost',                     # Remplacez par l'hôte de votre serveur MySQL
-        'PORT': '3306',                          # Remplacez par le port de votre serveur MySQL (3306 est le port par défaut)
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+
+# 'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'django_cinetrek',  # Remplacez par le nom de votre base de données
+#         'USER': 'root',       # Remplacez par votre utilisateur MySQL
+#         'PASSWORD': 'midikizi',  # Remplacez par votre mot de passe MySQL
+#         'HOST': 'localhost',                     # Remplacez par l'hôte de votre serveur MySQL
+#         'PORT': '3306',                          # Remplacez par le port de votre serveur MySQL (3306 est le port par défaut)
+#     }
 }
 
 
