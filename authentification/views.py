@@ -23,7 +23,8 @@ class RegisterClient(APIView):
         serializer = ClientSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            token, created = Token.objects.create(user=serializer.client)
+            return Response({'user': serializer.data, 'token': token}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 @permission_classes([AllowAny])
@@ -32,13 +33,14 @@ class RegisterGerant(APIView):
         serializer = GerantSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            token, created = Token.objects.create(user=serializer.gerant)
+            return Response({'user': serializer.data, 'token': token}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class LoginView(APIView):
     def post(self, request):
-        username = request.data.get('username')
-        password = request.data.get('password')
+        username = request.data.get('username', '')
+        password = request.data.get('password', '')
 
         user = authenticate(username=username, password=password)
         if user is not None:
