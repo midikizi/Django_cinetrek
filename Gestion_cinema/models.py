@@ -71,9 +71,11 @@ class Projection(models.Model):
     date = models.DateField()
     prix = models.FloatField(default=0)
     film = models.ForeignKey(Film, on_delete=models.CASCADE)
-
     class Meta:
         abstract = True
+
+    def __str__(self):
+        return self.nom
 
 class Seance(Projection):
     heureDebut = models.DateTimeField()

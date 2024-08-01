@@ -1,7 +1,11 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 
+from django.urls import path, include
 from .views import *
 
+router = DefaultRouter()
+router.register(r'ticket', TicketViewSet)
+
 urlpatterns = [
-    path('ticket/create', create_ticket, name="ticket")
+    path('', include(router.urls)),
 ]
