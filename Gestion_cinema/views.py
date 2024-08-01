@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 
 from .serializers import *
 from .models import *
@@ -7,6 +7,7 @@ from .models import *
 class CinemaViewSet(viewsets.ModelViewSet):
     queryset = Cinema.objects.all()
     serializer_class = CinemaSerializer
+    # permission_classes = [permissions.IsAuthenticated]
 
 class VilleViewSet(viewsets.ModelViewSet):
     queryset = Ville.objects.all()
@@ -28,6 +29,7 @@ class SalleViewSet(viewsets.ModelViewSet):
     queryset = Salle.objects.all()
     serializer_class = SalleSerializer
 
+<<<<<<< HEAD
 class ProjectionViewSet(viewsets.ModelViewSet):
     queryset = Seance.objects.all()
     serializer_class = SeanceSerializer
@@ -36,3 +38,8 @@ class ProjectionViewSet(viewsets.ModelViewSet):
 #     queryset = Seance.objects.all()
 #     serializer_class = SeanceSerializer
 
+=======
+class SeanceViewSet(viewsets.ModelViewSet):
+    queryset = Seance.objects.all()
+    serializer_class = SeanceSerializer
+>>>>>>> 1b03d19b5d0195e42e25cb7830cc5966d0f53179

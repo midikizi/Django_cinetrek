@@ -4,6 +4,7 @@ from django.urls import path, include
 from .views import *
 
 router = DefaultRouter()
+<<<<<<< HEAD
 router.register(r'cinema', CinemaViewSet)
 router.register(r'ville', VilleViewSet)
 router.register(r'categorie', CategorieViewSet)
@@ -12,6 +13,15 @@ router.register(r'place', PlaceViewSet)
 router.register(r'salle', SalleViewSet)
 router.register(r'projection', ProjectionViewSet)
 # router.register(r'seance', SeanceViewSet)
+
+router.register(r'cinemas', CinemaViewSet)
+router.register(r'villes', VilleViewSet)
+router.register(r'categories', CategorieViewSet)
+router.register(r'films', FilmViewSet)
+router.register(r'places', PlaceViewSet)
+router.register(r'salles', SalleViewSet)
+router.register(r'seances', SeanceViewSet)
+>>>> 1b03d19b5d0195e42e25cb7830cc5966d0f53179
 
 """
 GET /cinema/ : Récupérer la liste de tous les cinémas.
