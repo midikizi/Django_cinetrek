@@ -15,3 +15,14 @@ GET http://127.0.0.1:8000/api/cinema/cinamas/
 Content-Type: application/json
 
 {}
+
+POST http://127.0.0.1:8000/api/cinema/villes/
+Content-Type: application/json
+
+{
+    "nom": "Paris",
+    "longitude": 2.3522,
+    "latitute": 48.8566,
+    "altitude": 35,
+    "cinema": [1]  // IDs des cinémas associés
+}
