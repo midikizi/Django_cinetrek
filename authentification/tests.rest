@@ -12,7 +12,7 @@ Content-Type: application/json
 
 ###
 
-POST http://127.0.0.1:8000/accounts/api/api-auth-token
+POST http://127.0.0.1:8000/accounts/api/api-auth-token/
 Content-Type: application/json
 Authorization: Token xxxxxxxxx
 

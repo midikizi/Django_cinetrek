@@ -4,7 +4,7 @@ from django.urls import path, include
 from .views import *
 
 router = DefaultRouter()
-router.register(r'ticket', TicketViewSet)
+router.register(r'tickets', TicketViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

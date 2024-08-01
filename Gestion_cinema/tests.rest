@@ -1,0 +1,17 @@
+POST http://127.0.0.1:8000/api/cinema/cinamas/
+Content-Type: application/json
+
+{
+    "nom": "a",
+    "nombreSalle": 5,
+    "longitude": 5.1,
+    "latitute": 5.1,
+    "altitude": 5.1
+}
+
+###
+
+GET http://127.0.0.1:8000/api/cinema/cinamas/
+Content-Type: application/json
+
+{}
