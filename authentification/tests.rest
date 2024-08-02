@@ -1,19 +1,28 @@
 POST http://127.0.0.1:8000/accounts/api/login/
 Content-Type: application/json
 
-{"username": "john_doe", "password": "john"}
+{
+    "username": "johnny",
+    "password": "johnn"
+}
 
 ### rest client
 
 POST http://127.0.0.1:8000/accounts/api/sign-up/client/
 Content-Type: application/json
 
-{"username": "john_doe", "password": "john", "email": "john@gmail.com", "first_name": "Doe", "last_name": "John"}
+{
+    "username": "johnny", 
+    "password": "johnn", 
+    "email": "johnny@gmail.com", 
+    "first_name": "Doe", 
+    "last_name": "John"
+}
 
 ###
-
-POST http://127.0.0.1:8000/accounts/api/api-auth-token/
+###### cmd => curl -X GET http://localhost:8000/accounts/api/test-view/ -H "Authorization: Token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+GET http://127.0.0.1:8000/accounts/api/test-view/
 Content-Type: application/json
-Authorization: Token xxxxxxxxx
+Authorization: token 59aa2cf0a2bab3f1d6b9b4bf3d8edf676b5eaff5
 
-{"username": "john_doe", "password": "john"}
+###
