@@ -47,20 +47,24 @@ class Place(models.Model):
     libre = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.numero
+        return str(self.numero) 
 
 class Salle(models.Model):
     nom = models.CharField(max_length=100)
     nombrePlace = models.IntegerField(default=1)
     cinema = models.ForeignKey(Cinema, verbose_name="", on_delete=models.CASCADE)
-    places = models.ManyToManyField(Place, verbose_name="")
+    places = models.ManyToManyField(Place, verbose_name="places de la salle")
 
     def __str__(self):
         return self.nom
-    
-    def save(self, *args, **kwargs):
-        if self.nombrePlace >= len(self.places):
-            super().save(*args, **kwargs)
+
+
+    # def save(self, *args, **kwargs):
+    #     # Puis vérifiez la relation many-to-many
+    #     if self.nombrePlace < len(self.places.all()):
+    #         raise ValueError("Le nombre de places ne peut pas être inférieur au nombre de relations places.")
+    #     else:
+    #         super().save(*args, **kwargs)
 
     def prix_salle(self):
         prixSalle = 0

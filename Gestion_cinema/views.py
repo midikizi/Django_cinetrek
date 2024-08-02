@@ -1,4 +1,6 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework import status
 
 from .serializers import *
 from .models import *
@@ -7,7 +9,6 @@ from .models import *
 class CinemaViewSet(viewsets.ModelViewSet):
     queryset = Cinema.objects.all()
     serializer_class = CinemaSerializer
-    # permission_classes = [permissions.IsAuthenticated]
 
 class VilleViewSet(viewsets.ModelViewSet):
     queryset = Ville.objects.all()
@@ -29,7 +30,19 @@ class SalleViewSet(viewsets.ModelViewSet):
     queryset = Salle.objects.all()
     serializer_class = SalleSerializer
 
-<<<<<<< HEAD
+    def create(self, request, *args, **kwargs):
+        data = request.data
+
+        # Ensure 'id' is not required if it's auto-generated
+        if 'id' in data:
+            pass # Log a warning or handle the situation as needed
+
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
 class ProjectionViewSet(viewsets.ModelViewSet):
     queryset = Seance.objects.all()
     serializer_class = SeanceSerializer
@@ -38,8 +51,3 @@ class ProjectionViewSet(viewsets.ModelViewSet):
 #     queryset = Seance.objects.all()
 #     serializer_class = SeanceSerializer
 
-=======
-class SeanceViewSet(viewsets.ModelViewSet):
-    queryset = Seance.objects.all()
-    serializer_class = SeanceSerializer
->>>>>>> 1b03d19b5d0195e42e25cb7830cc5966d0f53179

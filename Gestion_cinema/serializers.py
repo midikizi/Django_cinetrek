@@ -31,16 +31,7 @@ class SalleSerializer(serializers.HyperlinkedModelSerializer):
         model = Salle
         fields = '__all__'
 
-<<<<<<< HEAD
-# class ProjectionSerializer(serializers.Serializer):
-#     class Meta:
-#         model = Projection
-#         fields = '__all__'
-
-class SeanceSerializer(serializers.Serializer):
-=======
 class SeanceSerializer(serializers.HyperlinkedModelSerializer):
->>>>>>> 1b03d19b5d0195e42e25cb7830cc5966d0f53179
     class Meta:
         model = Seance
         fields = '__all__'

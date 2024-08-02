@@ -13,12 +13,11 @@ from django.contrib.auth import authenticate
 @api_view(["POST"])
 def register_user_client(request):
     serializer = ClientSerializer(data=request.data)
-
     if serializer.is_valid():
         serializer.save()
         user = Client.objects.get(username=request.data['username'])
         token = Token.objects.get(user=user)
-
+        
         serializer = ClientSerializer(user)
         data = {
             "user": serializer.data,

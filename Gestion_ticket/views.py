@@ -1,7 +1,6 @@
 from rest_framework import viewsets
-
 from .serializers import *
-from .models import *
+from .models import Ticket
 
 # Create your views here.
 class TicketViewSet(viewsets.ModelViewSet):
