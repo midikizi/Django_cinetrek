@@ -26,14 +26,15 @@ SECRET_KEY = 'django-insecure-r!$h_^kb^-c$$5bqpro7zy3ep2o22vc0)7hrmo0adsovh=ehw5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'rest_framework',
+    'corsheaders', # pip install django-cors-headers
+    'rest_framework', # pip install djangorestframework
     'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,7 +55,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # 'corsheaders
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True # Autoriser toutes les origines (pour le développement uniquement)
+# Autoriser votre application Angular à accéder à l'API
+CORS_ALLOWED_ORIGINS = [ "http://localhost:4200", ] # URL de votre application Angular
 
 ROOT_URLCONF = 'Django_Cinetrek.urls'
 
