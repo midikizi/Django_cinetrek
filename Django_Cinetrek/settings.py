@@ -28,8 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -59,6 +57,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True # Autoriser toutes les origines (pour le développement uniquement)
+
 # Autoriser votre application Angular à accéder à l'API
 CORS_ALLOWED_ORIGINS = [ "http://localhost:4200", ] # URL de votre application Angular
 
