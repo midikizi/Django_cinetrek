@@ -7,7 +7,7 @@ POST http://127.0.0.1:8000/api/ticket/tickets/
 Content-Type: application/json
 
 {
-    "nomClient": "nomClient",
+    "nomClient": 1,
     "prix": "prix",
     "salle": 1,
     "place": 1,

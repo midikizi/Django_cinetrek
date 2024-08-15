@@ -3,5 +3,5 @@ from .models import *
 
 class TicketSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        models = Ticket
+        model = Ticket
         fields = '__all__'
