@@ -26,14 +26,15 @@ SECRET_KEY = 'django-insecure-r!$h_^kb^-c$$5bqpro7zy3ep2o22vc0)7hrmo0adsovh=ehw5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'rest_framework',
+    'corsheaders', # pip install django-cors-headers
+    'rest_framework', # pip install djangorestframework
     'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -56,7 +57,19 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # 'corsheaders
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True 
+CORS_ALLOW_CREDENTIALS = True
+# Autoriser votre application Angular à accéder à l'API
+CORS_ALLOWED_ORIGINS = [ "http://localhost:4200", ] # URL de votre application Angular
+
+CORS_ALLOW_HEADERS =[
+    'Authorization',
+    'Content-Type',
+]
+ALLOWED_HOSTS = ['127.0..0.1:8000']
 
 ROOT_URLCONF = 'Django_Cinetrek.urls'
 
@@ -88,7 +101,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ),
 }
 
@@ -148,6 +161,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+ALLOWED_HOSTS = ['localhost']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
