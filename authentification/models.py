@@ -8,8 +8,7 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
 
-class Client(CustomUser):
-    pass
+class Client(CustomUser): pass
 
 class Gerant(CustomUser):
     pass

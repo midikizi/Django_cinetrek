@@ -28,8 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,7 +43,6 @@ INSTALLED_APPS = [
     'authentification',
     'Gestion_cinema',
     'Gestion_ticket',
-   
 ]
 
 MIDDLEWARE = [
@@ -59,8 +56,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True 
-CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True # Autoriser toutes les origines (pour le développement uniquement)
 # Autoriser votre application Angular à accéder à l'API
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:4200'
@@ -176,6 +173,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+MEDIA_URL = 'medias/'
+MEDIA_ROOT = BASE_DIR / 'Django_Cinetrek/media/'
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Default primary key field type
