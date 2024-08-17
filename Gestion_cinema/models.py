@@ -22,6 +22,7 @@ class Ville(models.Model):
         return self.nom
 
 class Categorie(models.Model):
+    id = models.BigAutoField(primary_key=True, null=False)
     nom = models.CharField(max_length=50)
     description = models.TextField()
 
@@ -29,13 +30,14 @@ class Categorie(models.Model):
         return self.nom
 
 class Film(models.Model):
+    id = models.BigAutoField(primary_key=True)
     titre = models.CharField(max_length=75)
     duree = models.FloatField()
     realisateur = models.CharField(max_length=75)
     description = models.TextField()
-    photo = models.ImageField(upload_to="films/")
+    photo = models.ImageField(upload_to="films/",null=True, default='')
     dateSortie = models.DateField()
-    category = models.ManyToManyField(Categorie, verbose_name="")
+    category = models.ForeignKey(Categorie, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.titre

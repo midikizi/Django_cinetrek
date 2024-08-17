@@ -11,12 +11,12 @@ class VilleSerializer(serializers.HyperlinkedModelSerializer):
         model = Ville
         fields = ['id','nombreSalle','longitude','latitute','altitude','cinema']
 
-class CategorieSerializer(serializers.HyperlinkedModelSerializer):
+class CategorieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categorie
         fields = ['id', 'nom', 'description' ]
 
-class FilmSerializer(serializers.HyperlinkedModelSerializer):
+class FilmSerializer(serializers.ModelSerializer):
     class Meta:
         model = Film
         fields = ['id','titre','duree','realisateur','description','photo','dateSortie','category']
