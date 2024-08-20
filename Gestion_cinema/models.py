@@ -6,7 +6,7 @@ class Ville(models.Model):
     nom = models.CharField(max_length=75)
     longitude = models.FloatField()
     latitute = models.FloatField()
-    altitude = models.FloatField()
+    altitude = models.FloatField(null=False)
     
 
     def __str__(self):
@@ -18,7 +18,7 @@ class Cinema(models.Model):
     nombreSalle = models.IntegerField(default=1)
     longitude = models.FloatField()
     latitute = models.FloatField()
-    altitude = models.FloatField()
+    altitude = models.FloatField(null=False)
     ville = models.ForeignKey(Ville, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
