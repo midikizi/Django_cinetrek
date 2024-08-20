@@ -10,7 +10,7 @@ class Ticket(models.Model):
     codePayement = models.CharField(max_length=100, blank=True)
     salle = models.ForeignKey(Salle, on_delete=models.CASCADE, default=None)
     place = models.ForeignKey(Place, on_delete=models.CASCADE, default=None)
-    seance = models.ForeignKey(Seance, on_delete=models.CASCADE, default=None)
+    seance = models.ForeignKey(Seance, on_delete=models.CASCADE, default=None, null=True)
     nomClient = models.ForeignKey(Client, on_delete=models.CASCADE, default=None)
     # nomClient = models.CharField(max_length=100, blank=True)
 

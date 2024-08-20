@@ -7,7 +7,7 @@ from .models import Client, Gerant
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client
-        fields = ['id', 'username', 'password', 'email', 'first_name', 'last_name']
+        fields = ['id', 'username', 'password', 'email', 'first_name', 'last_name','is_gerant']
 
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data['password'])
@@ -21,7 +21,7 @@ class ClientSerializer(serializers.ModelSerializer):
 class GerantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Gerant
-        fields = ['id', 'username', 'password', 'email', 'first_name', 'last_name']
+        fields = ['id', 'username', 'password', 'email', 'first_name', 'last_name','is_gerant']
 
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data['password'])
