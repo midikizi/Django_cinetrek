@@ -11,11 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -40,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'authentification',
+    'authentification', # pip manage.py startapp authentification
     'Gestion_cinema',
     'Gestion_ticket',
 ]
@@ -56,33 +54,21 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True # Autoriser toutes les origines (pour le développement uniquement)
+CORS_ALLOW_ALL_ORIGINS = CORS_ALLOW_CREDENTIALS = True # Autoriser toutes les origines (pour le développement uniquement)
 # Autoriser votre application Angular à accéder à l'API
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:4200'
-]# URL de votre application Angular
+CORS_ALLOWED_ORIGINS = [ 'http://localhost:4200' ] # URL de votre application Angular
 
 CORS_ALLOW_METHODS = [
-    'GET',
-    'POST',
-    'PUT',
-    'PATCH',
-    'DELETE',
-    'OPTIONS',
+    'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS',
 ]
 
 CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
+    'accept', 'accept-encoding',
+    'authorization', 'content-type',
+    'dnt', 'origin', 'user-agent',
+    'x-csrftoken', 'x-requested-with',
 ]
+
 ROOT_URLCONF = 'Django_Cinetrek.urls'
 
 TEMPLATES = [
@@ -121,18 +107,9 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-
-'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_cinetrek',  # Remplacez par le nom de votre base de données
-        'USER': 'root',       # Remplacez par votre utilisateur MySQL
-        'PASSWORD': 'midikizi',  # Remplacez par votre mot de passe MySQL
-        'HOST': 'localhost',                     # Remplacez par l'hôte de votre serveur MySQL
-        'PORT': '3306',                          # Remplacez par le port de votre serveur MySQL (3306 est le port par défaut)
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -176,7 +153,6 @@ STATIC_URL = 'static/'
 
 MEDIA_URL = 'medias/'
 MEDIA_ROOT = BASE_DIR / 'Django_Cinetrek/media/'
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
