@@ -1,10 +1,9 @@
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import authentication_classes, permission_classes
-from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 from .serializers import *
@@ -12,7 +11,6 @@ from .models import *
 from django.contrib.auth import authenticate
 
 @api_view(["POST"])
-@permission_classes([AllowAny])
 def register_user_client(request):
     serializer = ClientSerializer(data=request.data)
 
@@ -27,7 +25,6 @@ def register_user_client(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(["POST"])
-@permission_classes([AllowAny])
 def register_user_gerant(request):
     serializer = GerantSerializer(data=request.data)
 
@@ -42,7 +39,6 @@ def register_user_gerant(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(["POST"])
-@permission_classes([AllowAny])
 def login_user(request):
     username = request.data.get('username', None)
     password = request.data.get('password', None)

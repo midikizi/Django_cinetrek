@@ -158,3 +158,8 @@ MEDIA_ROOT = BASE_DIR / 'Django_Cinetrek/media/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import os
+
+PAYGATE_MERCHANT_ID = os.getenv('PAYGATE_MERCHANT_ID')
+PAYGATE_SECRET_KEY = os.getenv('PAYGATE_SECRET_KEY')
