@@ -5,10 +5,10 @@ from authentification.serializers import ClientSerializer
 from Gestion_cinema.serializers import *
 
 class TicketSerializer(serializers.ModelSerializer):
-    salle = SalleSerializer()
-    place = PlaceSerializer()
-    seance = SalleSerializer()
-    nomClient = ClientSerializer()
+    # salle = SalleSerializer()
+    # place = PlaceSerializer()
+    # seance = SalleSerializer()
+    # nomClient = ClientSerializer()
 
     class Meta:
         model = Ticket

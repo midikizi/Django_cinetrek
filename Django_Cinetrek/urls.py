@@ -24,4 +24,7 @@ urlpatterns = [
     path('accounts/api/', include('authentification.urls')),
     path('api/cinema/', include('Gestion_cinema.urls')),
     path('api/ticket/', include('Gestion_ticket.urls')),
-] + static(settings.MEDIA_URL, documentation=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

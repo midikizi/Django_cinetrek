@@ -38,7 +38,7 @@ class Film(models.Model):
     duree = models.FloatField()
     realisateur = models.CharField(max_length=75)
     description = models.TextField()
-    photo = models.ImageField(upload_to="films/",null=True, default='')
+    photo = models.FileField(upload_to="films/",null=True, default='')
     dateSortie = models.DateField()
     category = models.ForeignKey(Categorie, on_delete=models.CASCADE, null=True)
 
